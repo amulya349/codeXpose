@@ -5,3 +5,10 @@
 
 - name: install virtualenv
   pip: name=virtualenv state=present
+
+- name: install gunicorn
+  pip: name=gunicorn state=present
+
+- name: install nginx
+  apt: name=nginx state=present
+
