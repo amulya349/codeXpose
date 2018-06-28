@@ -29,3 +29,9 @@
 - name: remove changepassword.sh
   file: path="{{django_dir}}/changepassword.sh" state=absent
 
+- name: Run Django collectstatic
+  shell: . {{ virtualenv_dir }}/bin/activate
+         && cd {{ django_dir }}
+         && python manage.py collectstatic
+
+
