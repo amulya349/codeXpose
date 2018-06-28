@@ -3,9 +3,22 @@
 # tasks file for django
 
 - name: Create the virtualenv
-  command: virtualenv -p python3 {{ virtualenv_dir }} 
+  command: virtualenv -p python3 {{ virtualenv_dir }}
 
 - name: Install requirements
   shell: . {{ virtualenv_dir }}/bin/activate && pip install -r {{ requirements_file }}
+
+- name: Give executable permission to start_gunicorn.sh
+  shell: chmod 777 ./start_gunicorn.sh
+
+- name: Configuring Nginx
+  shell: mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf_backup && cp prod_nginx.conf /etc/nginx/nginx.conf
+
+- name: Setting static file path in Nginx conf
+  shell: sed -i 's@\/absolute\/path\/to\/static\/files@'"$PWD"'@g' /etc/nginx/nginx.conf
+
+- name: Restarting Nginx
+  shell: systemctl restart nginx
+
 
 - include: django_manage.yml
