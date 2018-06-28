@@ -33,7 +33,17 @@ Follow the below steps to get the development environment up and running.
 Now, the server should be running at - <br>
 `http://127.0.0.1:8000/`
 
+To run the server using gunicorn and Nginx:<br>
+`$ ./start_gunicorn.sh`
+
+Now, the server should be running at - <br>
+`http://localhost/`
+
+To stop the gunicorn server:<br>
+`$ sudo fuser -k 8000/tcp`
+
 Note the default admin user is **admin@xyz.com**<br>
+
 
 ## Using Docker
 ### Install Docker and Docker Compose
